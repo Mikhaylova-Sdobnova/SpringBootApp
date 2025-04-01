@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+<form th:action="@{/admin/edit}" th:object="${user}" method="POST">
+    <label>
+        <input name="id" th:field="*{id}" th:value="${user.id}" hidden="hidden">
+    </label>
+    <label for="name">First Name</label>
+    <input type="text" id="name" th:field="*{name}" th:value="${user.name}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    </br>
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" th:field="*{lastName}" th:value="${user.lastName}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name error</div>
+    </br>
+    <label for="age">Age</label>
+    <input type="text" id="age" th:field="*{age}" th:value="${user.age}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name error</div>
+    </br>
+    <label for="username">Email</label>
+    <input type="text" id="username" th:field="*{username}" th:value="${user.username}" required>
+    <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
+    </br>
+    <label>
+        <input name="password" th:field="*{password}" th:value="${user.password}" hidden="hidden">
+    </label>
+    </br>
+    <label for="roles">Choose role(s)</label>
+    <select class="form-select" id="roles" name="authorities" required multiple>
+        <option value='ROLE_ADMIN'>ADMIN</option>
+        <option value='ROLE_USER'>USER</option>
+    </select>
+    </br>
+    </br>
+    <button type="submit">Edit</button>
+</form>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
+</form>
+</body>
