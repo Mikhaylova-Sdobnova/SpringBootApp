@@ -2,6 +2,7 @@ package ru.mikhailova.julia.SpringBootApp.сontroller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,17 +28,37 @@ public class AdminController {
     }
 
     @GetMapping
-    public String allUsers(Model model) {
+    public String allUsers(Model model, Authentication authentication) {
         List<User> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "admin-page";
+        String username = authentication.getName();
+        User admin = userService.getUserByUsername(username);
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+            model.addAttribute("users", users);
+
+            return "admin-page";
+        } else {
+
+            return "redirect:/login";
+        }
     }
 
     @GetMapping("/new")
-    public String createUserForm(@ModelAttribute("user") User user, Model model) {
+    public String createUserForm(@ModelAttribute("user") User user,
+                                 Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User admin = userService.getUserByUsername(username);
         List<Role> roles = roleService.getAllRoles();
-        model.addAttribute("allRoles", roles);
-        return "add-new-user";
+
+        if (admin != null) {
+            model.addAttribute("admin", admin);
+            model.addAttribute("allRoles", roles);
+
+            return "add-new-user";
+        } else {
+
+            return "redirect:/login";
+        }
     }
 
     @PostMapping
@@ -87,16 +108,5 @@ public class AdminController {
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
-    }
-
-    @GetMapping("/view")
-    public String userView (@RequestParam("id") Long id, Model model) {
-        User userById = userService.findById(id);
-        if (userById != null) {
-            model.addAttribute("user", userById);
-            return "user-view";
-        } else {
-            return "redirect:/admin";
-        }
     }
 }
