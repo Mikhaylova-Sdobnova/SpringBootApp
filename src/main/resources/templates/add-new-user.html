@@ -30,9 +30,10 @@
     <label for="roles">Roles</label>
     </br>
     <select class="form-select" id="roles" name="authorities" required multiple>
-        <option value='ROLE_ADMIN'>ADMIN</option>>
-        <option value='ROLE_USER'>USER</option>>
-    </select>>
+        <option th:each="role : ${allRoles}"
+                         th:text="${role.toString()}"
+                th:value="${role.id}"></option>
+    </select>
     </br>
     <button type="submit">Add new user</button>
 </form>

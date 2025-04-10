@@ -1,16 +1,12 @@
-package ru.mikhailova.julia.SpringBootApp.Service;
+package ru.mikhailova.julia.SpringBootApp.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.mikhailova.julia.SpringBootApp.DAO.UserDao;
-import ru.mikhailova.julia.SpringBootApp.Model.Role;
-import ru.mikhailova.julia.SpringBootApp.Model.User;
-
+import ru.mikhailova.julia.SpringBootApp.dao.UserDao;
+import ru.mikhailova.julia.SpringBootApp.model.User;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,19 +29,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public List<User> findAll() {
         return userDao.findAll();
     }
 
     @Override
-    @Transactional
     public User findById(Long id) {
         return userDao.findById(id);
     }
 
     @Override
-    @Transactional
     public User getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }
@@ -60,11 +53,5 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteById(Long id) {
         userDao.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public Set<Role> getSetOfRoles(List<String> rolesId){
-        return userDao.getSetOfRoles(rolesId);
     }
 }

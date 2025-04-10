@@ -1,4 +1,4 @@
-package ru.mikhailova.julia.SpringBootApp.Configuration;
+package ru.mikhailova.julia.SpringBootApp.сonfiguration;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

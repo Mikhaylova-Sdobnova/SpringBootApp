@@ -1,13 +1,11 @@
-package ru.mikhailova.julia.SpringBootApp.Controller;
+package ru.mikhailova.julia.SpringBootApp.сontroller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.mikhailova.julia.SpringBootApp.Model.User;
-import ru.mikhailova.julia.SpringBootApp.Service.UserService;
-
-import java.util.Optional;
+import ru.mikhailova.julia.SpringBootApp.model.User;
+import ru.mikhailova.julia.SpringBootApp.service.UserService;
 
 @Controller
 @RequestMapping("/user")

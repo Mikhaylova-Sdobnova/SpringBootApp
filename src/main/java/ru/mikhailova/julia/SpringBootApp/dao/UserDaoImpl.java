@@ -1,34 +1,16 @@
-package ru.mikhailova.julia.SpringBootApp.DAO;
+package ru.mikhailova.julia.SpringBootApp.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.mikhailova.julia.SpringBootApp.Model.Role;
-import ru.mikhailova.julia.SpringBootApp.Model.User;
-
+import ru.mikhailova.julia.SpringBootApp.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import ru.mikhailova.julia.SpringBootApp.Service.RoleService;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-    private final RoleService roleService;
-    private final Role role;
-
-    @Autowired
-    public UserDaoImpl(RoleService roleService, Role role){
-        this.roleService = roleService;
-        this.role = role;
-    }
 
     @Override
     public void save(User user) {
@@ -48,7 +30,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
         return entityManager.createQuery("select distinct a from User a left join fetch a.roles where a.username = :username", User.class)
                 .setParameter("username", username).getSingleResult();
@@ -63,18 +44,5 @@ public class UserDaoImpl implements UserDao {
     public void deleteById(Long id) {
         User userById = findById(id);
         entityManager.remove(userById);
-    }
-
-    @Override
-    public Set<Role> getSetOfRoles(List<String> roles){
-        Set<Role> roleSet = new HashSet<>();
-        for (String name: roles) {
-            roleSet.add(new Role(name));
-        }
-        for (Role role : roleSet) {
-            roleService.saveRole(role);
-        }
-
-        return roleSet;
     }
 }

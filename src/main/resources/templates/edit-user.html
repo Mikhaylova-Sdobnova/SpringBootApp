@@ -30,10 +30,11 @@
         <input name="password" th:field="*{password}" th:value="${user.password}" hidden="hidden">
     </label>
     </br>
-    <label for="roles">Choose role(s)</label>
+    <label for="roles">Role</label>
     <select class="form-select" id="roles" name="authorities" required multiple>
-        <option value='ROLE_ADMIN'>ADMIN</option>
-        <option value='ROLE_USER'>USER</option>
+        <option th:each="role : ${allRoles}"
+                        th:text="${role.toString()}"
+                th:value="${role.id}"></option>
     </select>
     </br>
     </br>

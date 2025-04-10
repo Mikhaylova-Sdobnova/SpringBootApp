@@ -1,4 +1,4 @@
-package ru.mikhailova.julia.SpringBootApp.Controller;
+package ru.mikhailova.julia.SpringBootApp.сontroller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,10 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.mikhailova.julia.SpringBootApp.Model.Role;
-import ru.mikhailova.julia.SpringBootApp.Model.User;
-import ru.mikhailova.julia.SpringBootApp.Service.RoleService;
-import ru.mikhailova.julia.SpringBootApp.Service.UserService;
+import ru.mikhailova.julia.SpringBootApp.model.Role;
+import ru.mikhailova.julia.SpringBootApp.model.User;
+import ru.mikhailova.julia.SpringBootApp.service.RoleService;
+import ru.mikhailova.julia.SpringBootApp.service.UserService;
 
 import java.util.*;
 
@@ -34,24 +34,22 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String createUserForm(@ModelAttribute("user") User user) {
-        System.out.println("new user");
+    public String createUserForm(@ModelAttribute("user") User user, Model model) {
+        List<Role> roles = roleService.getAllRoles();
+        model.addAttribute("allRoles", roles);
         return "add-new-user";
     }
 
     @PostMapping
     public String createUser(@ModelAttribute("user") @Valid User user,
-                             @RequestParam("authorities") List<String> values,
+                             @RequestParam("authorities") List<Long> values,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "redirect:/admin";
         }
-
-        Set<Role> roleSet = userService.getSetOfRoles(values);
+        Set<Role> roleSet = roleService.getSetOfRoles(values);
         user.setRoles(roleSet);
         userService.save(user);
-        System.out.println("User added!");
-        System.out.println(user.getRoles());
 
         return "redirect:/admin";
     }
@@ -71,14 +69,14 @@ public class AdminController {
 
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") @Valid User user,
-                           @RequestParam("authorities") List<String> values,
+                           @RequestParam("authorities") List<Long> values,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "edit-user";
         }
 
         if (values != null) {
-            Set<Role> roleSet = userService.getSetOfRoles(values);
+            Set<Role> roleSet = roleService.getSetOfRoles(values);
             user.setRoles(roleSet);
         }
         userService.updateUser(user);

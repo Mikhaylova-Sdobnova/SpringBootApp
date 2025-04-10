@@ -15,6 +15,7 @@
         <th>Last Name</th>
         <th>Age</th>
         <th>Email</th>
+        <th>Role</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.age}"></td>
         <td th:text="${user.username}"></td>
+        <td>
+            <span th:each="role : ${user.roles}" th:text="${role.toString()}"></span>
+        </td>
     </tr>
     </tbody>
 </table>

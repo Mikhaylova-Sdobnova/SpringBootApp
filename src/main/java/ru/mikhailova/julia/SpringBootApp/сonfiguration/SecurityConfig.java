@@ -1,4 +1,4 @@
-package ru.mikhailova.julia.SpringBootApp.Configuration;
+package ru.mikhailova.julia.SpringBootApp.сonfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,19 +9,20 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import ru.mikhailova.julia.SpringBootApp.DAO.UserDao;
+import ru.mikhailova.julia.SpringBootApp.dao.UserDao;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private UserDao userDao;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDao userDao){
-        this.userDao = userDao;
+    public SecurityConfig(UserDetailsService userDetailsService){
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean
@@ -32,7 +33,7 @@ public class SecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(username -> userDao.getUserByUsername(username));
+        authProvider.setUserDetailsService(username -> userDetailsService.loadUserByUsername(username));
         authProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authProvider;
     }
