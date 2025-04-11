@@ -36,35 +36,42 @@
             <div class="card" style="margin-right: 25px; margin-left: 25px;">
                 <h5 class="card-header">Add new user</h5>
                 <div class="card-body">
+                    <div class="row justify-content-center">
+                    <div class="col-4" style="text-align: center;">
 <form th:action="@{/admin}" th:object="${user}" method="POST">
-    <label for="name">First Name</label>
-    <input type="text" id="name" th:field="*{name}" required>
+    <div class="mb-3">
+        <label for="name" class="form-label form-label-sm"><strong>First Name</strong></label>
+    <input type="text" class="form-control form-control-sm" id="name" th:field="*{name}" placeholder="First Name" required>
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
-    </br>
-    <label for="lastName">Last Name</label>
-    <input type="text" id="lastName" th:field="*{lastName}" required>
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label form-label-sm"><strong>Last Name</strong></label>
+    <input type="text" class="form-control form-control-sm" id="lastName" th:field="*{lastName}" placeholder="Last Name" required>
     <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name error</div>
-    </br>
-    <label for="age">Age</label>
-    <input type="text" id="age" th:field="*{age}" required>
+    </div>
+        <div class="mb-3">
+            <label for="age" class="form-label"><strong>Age</strong></label>
+    <input type="number" min="0" max="120" class="form-control form-control-sm" id="age" th:field="*{age}" placeholder="Age" required>
     <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name error</div>
-    </br>
-    <label for="username">Email</label>
-    <input type="text" id="username" th:field="*{username}" required>
+    </div>
+    <div class="mb-3">
+        <label for="username" class="form-label"><strong>Email</strong></label>
+    <input type="email" class="form-control form-control-sm" id="username" th:field="*{username}" placeholder="Email" required>
     <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
-    </br>
-    <label for="password">Password</label>
-    <input type="text" id="password" th:field="*{password}" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label"><strong>Password</strong></label>
+    <input type="password" class="form-control form-control-sm" id="password" th:field="*{password}" placeholder="Password" required>
     <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</div>
-    </br>
-    <label for="roles">Roles</label>
-    </br>
-    <select class="form-select" id="roles" name="authorities" required multiple>
+    </div>
+    <div class="mb-3">
+        <label for="roles" class="form-label"><strong>Roles</strong></label>
+    <select class="form-select form-select-sm" size="2" id="roles" name="authorities" required multiple>
         <option th:each="role : ${allRoles}"
                          th:text="${role.toString()}"
                 th:value="${role.id}"></option>
     </select>
-    </br>
+    </div>
     <button type="submit" class="btn btn-success">Add new user</button>
 </form>
 </br>
@@ -72,6 +79,8 @@
     </div>
 </div>
     </div>
+        </div>
+</div>
 </div>
 </body>
 </html>

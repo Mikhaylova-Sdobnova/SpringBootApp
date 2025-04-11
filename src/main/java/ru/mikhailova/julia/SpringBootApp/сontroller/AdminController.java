@@ -13,6 +13,7 @@ import ru.mikhailova.julia.SpringBootApp.service.RoleService;
 import ru.mikhailova.julia.SpringBootApp.service.UserService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -93,14 +94,13 @@ public class AdminController {
                            @RequestParam("authorities") List<Long> values,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+
             return "edit-user";
         }
-
-        if (values != null) {
-            Set<Role> roleSet = roleService.getSetOfRoles(values);
-            user.setRoles(roleSet);
-        }
+        Set<Role> roleSet = roleService.getSetOfRoles(values);
+        user.setRoles(roleSet);
         userService.updateUser(user);
+
         return "redirect:/admin";
     }
 
