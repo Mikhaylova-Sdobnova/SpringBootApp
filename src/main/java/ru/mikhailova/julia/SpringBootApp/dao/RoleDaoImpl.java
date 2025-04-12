@@ -8,6 +8,7 @@ import ru.mikhailova.julia.SpringBootApp.model.Role;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {

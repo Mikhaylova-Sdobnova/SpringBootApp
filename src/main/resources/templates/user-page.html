@@ -18,7 +18,9 @@
     <div class="row g-0" style="height: 100vh;">
         <div class="col-2">
             <nav class="nav nav-pills flex-column" style="margin-top: 10px;">
+                <th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                 <a class="flex-sm-fill text-sm-left nav-link" href="/admin">Admin</a>
+                </th:block>
                 <a class="flex-sm-fill text-sm-left nav-link active" aria-current="page" href="/user">User</a>
             </nav>
         </div>

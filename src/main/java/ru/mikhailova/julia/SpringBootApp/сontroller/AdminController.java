@@ -11,9 +11,7 @@ import ru.mikhailova.julia.SpringBootApp.model.Role;
 import ru.mikhailova.julia.SpringBootApp.model.User;
 import ru.mikhailova.julia.SpringBootApp.service.RoleService;
 import ru.mikhailova.julia.SpringBootApp.service.UserService;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,11 +29,13 @@ public class AdminController {
     @GetMapping
     public String allUsers(Model model, Authentication authentication) {
         List<User> users = userService.findAll();
+        List<Role> roles = roleService.getAllRoles();
         String username = authentication.getName();
         User admin = userService.getUserByUsername(username);
         if (admin != null) {
             model.addAttribute("admin", admin);
             model.addAttribute("users", users);
+            model.addAttribute("allRoles", roles);
 
             return "admin-page";
         } else {
@@ -76,26 +76,13 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit")
-    public String editUserForm(@RequestParam("id") Long id, Model model) {
-        User userById = userService.findById(id);
-        List<Role> roles = roleService.getAllRoles();
-        model.addAttribute("allRoles", roles);
-        if (userById != null) {
-            model.addAttribute("user", userById);
-            return "edit-user";
-        } else {
-            return "redirect:/admin";
-        }
-    }
-
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") @Valid User user,
                            @RequestParam("authorities") List<Long> values,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
 
-            return "edit-user";
+            return "admin-page";
         }
         Set<Role> roleSet = roleService.getSetOfRoles(values);
         user.setRoles(roleSet);
