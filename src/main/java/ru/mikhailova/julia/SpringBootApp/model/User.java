@@ -1,5 +1,7 @@
 package ru.mikhailova.julia.SpringBootApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,6 +44,7 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonManagedReference
     private Set<Role> roles = new HashSet<>();
 
     // constructors
@@ -123,26 +126,31 @@ public class User implements UserDetails {
 
     // UserDetails methods
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return UserDetails.super.isAccountNonLocked();
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return UserDetails.super.isCredentialsNonExpired();
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }

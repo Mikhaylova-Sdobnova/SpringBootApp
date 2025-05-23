@@ -20,7 +20,7 @@
     <!-- Fist column with buttons -->
     <div class="col-2">
         <nav class="nav nav-pills flex-column" style="margin-top: 10px;">
-            <a class="flex-sm-fill text-sm-left nav-link active" aria-current="page" href="/admin">Admin</a>
+            <a class="flex-sm-fill text-sm-left nav-link active" aria-current="page" href="/templates/admin">Admin</a>
             <a class="flex-sm-fill text-sm-left nav-link" href="/user">User</a>
         </nav>
     </div>
@@ -30,10 +30,10 @@
         <!-- Nav with "add user" button -->
         <ul class="nav nav-tabs" style="margin-left: 25px; margin-right: 25px;">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/admin">Users table</a>
+                <a class="nav-link active" aria-current="page" href="/templates/admin">Users table</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/new">New users</a>
+                <a class="nav-link" href="/templates/admin/new">New user</a>
             </li>
         </ul>
         <!-- Users table -->
@@ -69,7 +69,7 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="${'#editModal'+ user.id}">Edit</button>
             <!-- Edit modal -->
             <div class="modal fade" th:id="${'editModal' + user.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                <form th:action="@{/admin/edit}" method="POST">
+                <form th:action="@{/templates/admin/edit}" method="POST">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -130,7 +130,7 @@
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="${'#deleteModal'+ user.id}">Delete</button>
             <!-- Delete modal -->
             <div class="modal fade" th:id="${'deleteModal' + user.id}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <form th:action="@{/admin/delete}" method="POST">
+                <form th:action="@{/templates/admin/delete}" method="POST">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

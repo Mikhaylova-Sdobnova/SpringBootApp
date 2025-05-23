@@ -45,13 +45,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user) {
+    public boolean updateUser(User user) {
         userDao.updateUser(user);
+        return false;
     }
 
     @Override
     @Transactional
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
         userDao.deleteById(id);
+        return false;
     }
 }

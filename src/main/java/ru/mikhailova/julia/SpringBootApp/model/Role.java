@@ -1,5 +1,7 @@
 package ru.mikhailova.julia.SpringBootApp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import jakarta.persistence.*;
 import java.util.List;
@@ -12,12 +14,14 @@ public class Role implements GrantedAuthority {
     // fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonBackReference
     private List<User> users;
 
     // constructors
@@ -61,6 +65,7 @@ public class Role implements GrantedAuthority {
     }
 
     @Override
+    @JsonIgnore
     public String getAuthority() {
         return name;
     }

@@ -19,7 +19,7 @@
     <div class="row g-0" style="height: 100vh;">
         <div class="col-2">
             <nav class="nav nav-pills flex-column" style="margin-top: 10px;">
-                <a class="flex-sm-fill text-sm-left nav-link active" aria-current="page" href="/admin">Admin</a>
+                <a class="flex-sm-fill text-sm-left nav-link active" aria-current="page" href="/templates/admin">Admin</a>
                 <a class="flex-sm-fill text-sm-left nav-link" href="/user">User</a>
             </nav>
         </div>
@@ -27,10 +27,10 @@
             <h1 style="margin-left: 25px; margin-top: 10px;">Admin panel</h1>
             <ul class="nav nav-tabs" style="margin-left: 25px; margin-right: 25px;">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Users table</a>
+                    <a class="nav-link" href="/templates/admin">Users table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/new">New users</a>
+                    <a class="nav-link active" aria-current="page" href="/templates/admin/new">New user</a>
                 </li>
             </ul>
             <div class="card" style="margin-right: 25px; margin-left: 25px;">
@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                     <div class="col-4" style="text-align: center;">
-<form th:action="@{/admin}" th:object="${user}" method="POST">
+<form th:action="@{/templates/admin}" th:object="${user}" method="POST">
     <div class="mb-3">
         <label for="name" class="form-label form-label-sm"><strong>First Name</strong></label>
     <input type="text" class="form-control form-control-sm" id="name" th:field="*{name}" placeholder="First Name" required>
@@ -56,7 +56,7 @@
     </div>
     <div class="mb-3">
         <label for="username" class="form-label"><strong>Email</strong></label>
-    <input type="email" class="form-control form-control-sm" id="username" th:field="*{username}" placeholder="Email" required>
+    <input type="email" class="form-control form-control-sm" id="username" th:field="*{username}" placeholder="Email" spellcheck="true" required>
     <div style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</div>
     </div>
     <div class="mb-3">
