@@ -14,14 +14,13 @@ public class Role implements GrantedAuthority {
     // fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
     @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    @JsonBackReference
+    @JsonIgnore
     private List<User> users;
 
     // constructors
@@ -65,7 +64,6 @@ public class Role implements GrantedAuthority {
     }
 
     @Override
-    @JsonIgnore
     public String getAuthority() {
         return name;
     }

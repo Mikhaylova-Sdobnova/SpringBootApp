@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,9 +18,9 @@
     <div class="row g-0" style="height: 100vh;">
         <div class="col-2">
             <nav class="nav nav-pills flex-column" style="margin-top: 10px;">
-                <th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="flex-sm-fill text-sm-left nav-link" href="/templates/admin">Admin</a>
-                </th:block>
+                </div>
                 <a class="flex-sm-fill text-sm-left nav-link active" aria-current="page" href="/user">User</a>
             </nav>
         </div>

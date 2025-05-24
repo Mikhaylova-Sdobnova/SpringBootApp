@@ -14,10 +14,10 @@ public class SuccessUserHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String targetUrl = "/user";
-        if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
-            targetUrl = "/admin";
-        }
+        String targetUrl = "/";
+//        if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+//            targetUrl = "/admin";
+//        }
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 }
