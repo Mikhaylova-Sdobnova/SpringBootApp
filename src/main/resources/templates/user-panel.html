@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<!-- Above navbar -->
+<nav class="navbar bg-dark">
+    <div style="margin-left: 20px;" class="text-white"><b><span id="emailSpan">email</span></b> with roles: <span id="rolesSpan">roles</span></div>
+    <!-- Logout link -->
+    <div>
+        <a class="nav-link text-white-50" style="margin-right: 20px;" th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+<div class="row g-0" style="height: 100vh;">
+    <!-- Fist column with buttons -->
+    <div class="col-2">
+        <div class="nav nav-pills flex-column" style="margin-top: 10px;" id="u-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="flex-sm-fill text-sm-left nav-link active" data-bs-toggle="tab" id="homeUserTab" href="#userUserPanel">User</a>
+        </div>
+    </div>
+    <!--Second column-->
+    <div class="col-10" style="background-color: #f8fcff;">
+        <div class="tab-content" id="u-pills-tabContent">
+            <!--        #userPanel-->
+            <div class="tab-pane fade show active" id="userUserPanel" role="tabpanel">
+                <h1 style="margin-left: 25px; margin-top: 10px;">User information page</h1>
+                <div class="card" style="margin-right: 25px; margin-left: 25px;">
+                    <h5 class="card-header">All users</h5>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead class="table-group-divider" style="color: #e9ecef;">
+                            <tr>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
+                            <tbody id="UserUserTableBody" class="table-group-divider" style="color: #e9ecef;">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // authenticated user page script
+    const URLUser = 'http://localhost:8080/api/user'
+    const authenticatedUser = document.getElementById('UserUserTableBody')
+    const aboveNavbarEmail = document.getElementById('emailSpan')
+    const aboveNavbarRoles = document.getElementById('rolesSpan')
+
+    function getAuthenticatedUser() {
+        fetch(URLUser)
+            .then((res) => res.json())
+            .then((user) => {
+                let rolesString = rolesToString(user.roles);
+                authenticatedUser.innerHTML = `<tr>
+                  <td>${user.id}</td>
+                  <td>${user.name}</td>
+                  <td>${user.lastName}</td>
+                  <td>${user.age}</td>
+                  <td>${user.username}</td>
+                  <td>${rolesString}</td>
+                  </tr>`
+                aboveNavbarEmail.innerHTML = `${user.username}`
+                aboveNavbarRoles.innerHTML = `${rolesString}`
+            })
+            .catch((error) => console.log(error))
+    }
+
+    function rolesToString(roles) {
+        let rolesString = ''
+        for (const role of roles) {
+            rolesString += (role.name.replace('ROLE_', '') + ' ')
+        }
+        return rolesString;
+    }
+
+    getAuthenticatedUser()
+</script>
+</body>
+</html>
