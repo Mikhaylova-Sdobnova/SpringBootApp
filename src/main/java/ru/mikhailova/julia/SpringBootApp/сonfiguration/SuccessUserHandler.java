@@ -16,7 +16,7 @@ public class SuccessUserHandler extends SimpleUrlAuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String targetUrl = "/user";
         if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
-            targetUrl = "/admin";
+            targetUrl = "/";
         }
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }

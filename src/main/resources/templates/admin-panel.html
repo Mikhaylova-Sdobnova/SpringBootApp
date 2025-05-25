@@ -181,7 +181,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Edit</button>
+                                <button type="submit" class="btn btn-primary" id="btnEdit">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -252,12 +252,12 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script> const URLUsers = 'http://localhost:8080/api/admin/users'
 let rows = document.getElementById('tableBody')
-let newRow = ''
 
 function getAllUsers() {
     fetch(URLUsers)
         .then((res) => res.json())
         .then((users) => {
+            let newRow = ''
             users.map((user) => {
                 let rolesString = rolesToString(user.roles);
                 return (newRow += `<tr>
@@ -353,7 +353,7 @@ function editUser() {
             });
         }
 
-        await fetch(URLUsers + "/" + formEdit.id.value, {
+            await fetch(URLUsers + "/" + formEdit.id.value, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -371,12 +371,14 @@ function editUser() {
             if (!response.ok) {
                 return response.json();
             } else {
-                return { message: "User updated successfully" };
+                return {message: "User updated successfully"}
             }
         }).then(data => {
-            modalEdit.hide()
         })
-    });
+                .catch((error) => console.log(error))
+        getAllUsers()
+        modalEdit.hide()
+    })
 }
 
 function loadRolesForEdit() {
@@ -418,6 +420,7 @@ function deleteUser() {
                     'Content-Type': 'application/json'
                 }
             });
+            getAllUsers();
             modalDelete.hide()
         } catch (error) {
             console.error(error);
@@ -475,9 +478,9 @@ const addedAge = document.getElementById("new-age")
 const addedUsername = document.getElementById("new-username")
 const addedPassword = document.getElementById("new-password")
 const addButton = document.getElementById("addBtn")
+let selectAdd = document.getElementById("new-roles");
 
-
-function addUser(name, lastName, age, username, password) {
+async function addUser(name, lastName, age, username, password) {
 
     let addedRoles = []
     for (let i = 0; i < formNewUser.roles.options.length; i++) {
@@ -487,7 +490,7 @@ function addUser(name, lastName, age, username, password) {
                 role: "ROLE_" + formNewUser.roles.options[i].text
             });
     }
-    fetch(URLUsers, {
+   await fetch(URLUsers, {
         method: "POST",
         body: JSON.stringify({
             name: name,
@@ -514,14 +517,15 @@ function addUser(name, lastName, age, username, password) {
             } else {
                 throw new Error("Failed to add")
             }
-        })
-        .then((user) => {
-        })
+        }).then(data => {
+    })
         .catch((error) => console.log(error))
+    $('#usersTable').click();
+    getAllUsers();
 }
 
 function newUserRoles() {
-    let selectAdd = document.getElementById("new-roles");
+
     selectAdd.innerHTML = "";
 
     fetch("http://localhost:8080/api/admin/roles")
