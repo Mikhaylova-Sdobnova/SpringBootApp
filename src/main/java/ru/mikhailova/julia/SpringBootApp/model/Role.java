@@ -2,6 +2,7 @@ package ru.mikhailova.julia.SpringBootApp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import jakarta.persistence.*;
 import java.util.List;

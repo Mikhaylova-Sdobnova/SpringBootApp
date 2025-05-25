@@ -8,7 +8,6 @@ import ru.mikhailova.julia.SpringBootApp.model.Role;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -24,14 +23,5 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role getRoleById(Long id) {
         return entityManager.find(Role.class, id);
-    }
-
-    @Override
-    public Set<Role> getSetOfRoles(List<Long> roles){
-        Set<Role> roleSet = new HashSet<>();
-        for (long id: roles) {
-            roleSet.add(getRoleById(id));
-        }
-        return roleSet;
     }
 }

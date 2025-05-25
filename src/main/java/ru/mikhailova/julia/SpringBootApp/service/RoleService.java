@@ -9,5 +9,4 @@ import java.util.Set;
 @Service
 public interface RoleService {
     List<Role> getAllRoles();
-    Set<Role> getSetOfRoles(List<Long> id);
 }

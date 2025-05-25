@@ -1,10 +1,8 @@
-package ru.mikhailova.julia.SpringBootApp.rest;
+package ru.mikhailova.julia.SpringBootApp.сontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.mikhailova.julia.SpringBootApp.model.Role;
 import ru.mikhailova.julia.SpringBootApp.model.User;

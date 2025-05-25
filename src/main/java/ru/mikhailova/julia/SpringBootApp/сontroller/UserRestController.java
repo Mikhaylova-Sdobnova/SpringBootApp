@@ -1,4 +1,4 @@
-package ru.mikhailova.julia.SpringBootApp.rest;
+package ru.mikhailova.julia.SpringBootApp.сontroller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -137,6 +137,7 @@
 <!--                end of new user section -->
                 <!-- #editModal -->
                 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <form id="editForm">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -144,64 +145,100 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                             </div>
                             <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!--                end of #editModal   -->
-                <!-- #deleteModal -->
-                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <form id="deleteForm">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete user</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                            </div>
-                            <div class="modal-body">
                                 <div class="row justify-content-center">
                                     <div class="col-6" style="text-align: center;">
                                         <div class="mb-3">
-                                            <label for="delete-id" class="form-label"><strong>ID</strong></label>
-                                            <input class="form-control form-control-sm" id="delete-id" name="id" disabled>
+                                            <label for="edit-id" class="form-label"><strong>ID</strong></label>
+                                            <input class="form-control form-control-sm" id="edit-id" name="id" disabled>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="delete-name" class="form-label"><strong>First Name</strong></label>
-                                            <input type="text" class="form-control form-control-sm" id="delete-name" name="name" disabled>
+                                            <label for="edit-name" class="form-label"><strong>First Name</strong></label>
+                                            <input type="text" class="form-control form-control-sm" id="edit-name" name="name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="delete-lastName" class="form-label"><strong>Last Name</strong></label>
-                                            <input type="text" id="delete-lastName" class="form-control form-control-sm" name="lastName" disabled>
+                                            <label for="edit-lastName" class="form-label"><strong>Last Name</strong></label>
+                                            <input type="text" id="edit-lastName" class="form-control form-control-sm" name="lastName" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="delete-age" class="form-label"><strong>Age</strong></label>
-                                            <input type="number" min="0" max="120" id="delete-age" class="form-control form-control-sm" name="age" disabled>
+                                            <label for="edit-age" class="form-label"><strong>Age</strong></label>
+                                            <input type="number" min="0" max="120" id="edit-age" class="form-control form-control-sm" name="age" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="delete-username" class="form-label"><strong>Email</strong></label>
-                                            <input type="email" id="delete-username" class="form-control form-control-sm" name="username" disabled>
+                                            <label for="edit-username" class="form-label"><strong>Email</strong></label>
+                                            <input type="email" id="edit-username" class="form-control form-control-sm" name="username" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="delete-roles" class="form-label"><strong>Role</strong></label>
-                                            <select class="form-select" size="2" id="delete-roles" name="roles" multiple disabled>
+                                            <label for="edit-password" class="form-label"><strong>Password</strong></label>
+                                            <input type="password" class="form-control form-control-sm" id="edit-password" name="password" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="edit-roles" class="form-label"><strong>Role</strong></label>
+                                            <select class="form-select" size="2" id="edit-roles" name="roles" required multiple>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="deleteClose">Close</button>
-                                <button type="button" class="btn btn-primary">Delete</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </div>
-                        </div>
-                        </form>
+                    </div>
+                    </form>
                 </div>
+<!--                end of #editModal   -->
+                <!-- #deleteModal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <form id="deleteForm">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Delete user</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row justify-content-center">
+                                        <div class="col-6" style="text-align: center;">
+                                            <div class="mb-3">
+                                                <label for="delete-id" class="form-label"><strong>ID</strong></label>
+                                                <input class="form-control form-control-sm" id="delete-id" name="id" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delete-name" class="form-label"><strong>First Name</strong></label>
+                                                <input type="text" class="form-control form-control-sm" id="delete-name" name="name" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delete-lastName" class="form-label"><strong>Last Name</strong></label>
+                                                <input type="text" id="delete-lastName" class="form-control form-control-sm" name="lastName" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delete-age" class="form-label"><strong>Age</strong></label>
+                                                <input type="number" min="0" max="120" id="delete-age" class="form-control form-control-sm" name="age" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delete-username" class="form-label"><strong>Email</strong></label>
+                                                <input type="email" id="delete-username" class="form-control form-control-sm" name="username" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delete-password" class="form-label"><strong>Password</strong></label>
+                                                <input type="password" class="form-control form-control-sm" id="delete-password" name="password" disabled>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="delete-roles" class="form-label"><strong>Role</strong></label>
+                                                <select class="form-select" size="2" id="delete-roles" name="roles" disabled multiple>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="btnDelete">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!--                end of #deleteModal   -->
             </div>
@@ -211,10 +248,10 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!--<script src="/js.js"></script>-->
 <script> const URLUsers = 'http://localhost:8080/api/admin/users'
-const rows = document.getElementById('tableBody')
+let rows = document.getElementById('tableBody')
 let newRow = ''
 
 function getAllUsers() {
@@ -230,7 +267,7 @@ function getAllUsers() {
                   <td>${user.age}</td>
                   <td>${user.username}</td>
                   <td>${rolesString}</td>
-                   <td>
+                  <td>
                           <button type="button"
                           class="btn btn-primary"
                           data-bs-toogle="modal"
@@ -239,11 +276,11 @@ function getAllUsers() {
                                 Edit
                             </button>
                         </td>
-                        <td>
+                  <td>
                             <button type="button"
                             class="btn btn-danger"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteModal"
+                            data-toggle="modal"
+                            data-target="#deleteModal"
                             onclick="deleteModal(${user.id})">
                                 Delete
                             </button>
@@ -293,24 +330,118 @@ function getAuthenticatedUser() {
 getAuthenticatedUser()
 
 // edit script
-function editModal(id) {
-    console.log("Edit Modal");
-    const modalEdit = new bootstrap.Modal(document.querySelector('#editModal'));
-    modalEdit.toggle()
+let formEdit = document.forms["editForm"]
+const modalEdit = new bootstrap.Modal(document.querySelector('#editModal'))
+let selectEdit = document.getElementById("edit-roles")
+const buttonSubmit = formEdit.querySelector('button[type="submit"]')
+
+editUser()
+
+async function editModal(id) {
+    await open_fill_modal(formEdit, modalEdit, id);
+    loadRolesForEdit()
 }
+function editUser() {
+    console.log("Edit User");
+    buttonSubmit.addEventListener("click", async e => {
+        e.preventDefault();
+        let rolesForEdit = [];
+        for (let i = 0; i < formEdit.roles.options.length; i++) {
+            if (formEdit.roles.options[i].selected) rolesForEdit.push({
+                id: formEdit.roles.options[i].value,
+                name: "ROLE_" + formEdit.roles.options[i].text
+            });
+        }
+
+        await fetch(URLUsers + "/" + formEdit.id.value, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: formEdit.id.value,
+                name: formEdit.name.value,
+                lastName: formEdit.lastName.value,
+                age: formEdit.age.value,
+                username: formEdit.username.value,
+                password: formEdit.password.value,
+                roles: rolesForEdit
+            })
+        }).then(response => {
+            if (!response.ok) {
+                return response.json();
+            } else {
+                return { message: "User updated successfully" };
+            }
+        }).then(data => {
+            modalEdit.hide()
+        })
+    });
+}
+
+function loadRolesForEdit() {
+    selectEdit.innerHTML = "";
+
+    fetch("http://localhost:8080/api/admin/roles")
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(role => {
+                let option = document.createElement("option");
+                option.value = role.id;
+                option.text = role.name.replace('ROLE_', '');
+                selectEdit.appendChild(option);
+            });
+        })
+}
+window.addEventListener("load", loadRolesForEdit);
 
 // delete script
 let formDelete = document.forms["deleteForm"]
+let modalDelete = new bootstrap.Modal(document.querySelector('#deleteModal'));
+let selectDelete = document.getElementById("delete-roles");
 
 deleteUser()
 
 async function deleteModal(id) {
-    console.log("Delete Modal");
-    let modalDelete = new bootstrap.Modal(document.querySelector('#deleteModal'));
     await open_fill_modal(formDelete, modalDelete, id);
     loadRolesForDelete()
 }
 
+function deleteUser() {
+    formDelete.addEventListener("submit", async e => {
+        e.preventDefault();
+        try {
+            const userId = formDelete.querySelector("#delete-id").value;
+            await fetch(URLUsers + "/" + userId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            modalDelete.hide()
+        } catch (error) {
+            console.error(error);
+        }
+    });
+}
+
+function loadRolesForDelete() {
+    selectDelete.innerHTML = "";
+
+    fetch("http://localhost:8080/api/admin/roles")
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(role => {
+                let option = document.createElement("option");
+                option.value = role.id;
+                option.text = role.name.replace('ROLE_', '');
+                selectDelete.appendChild(option);
+            });
+        })
+}
+window.addEventListener("load", loadRolesForDelete)
+
+// open_fill_modal
 async function open_fill_modal(form, modal, id) {
     const url = `http://localhost:8080/api/admin/users/${id}`;
     try {
@@ -335,39 +466,9 @@ async function open_fill_modal(form, modal, id) {
         console.error("Error fetching user data:", error);
     }
 }
-function deleteUser(id) {
-    fetch('/api/users/' + id, {method: 'DELETE'})
-        .then(function (response) {
-            modalDelete.modal('hide');
-            if (response.status === 404 || response.status === 400) {
-                response.text().then((value) => console.warn("Error message: " + value));
-                return;
-            }
-            // usersTableId.find('#userRow\\[' + id + '\\]').remove();
-            // console.info("User with id = " + id + " was deleted");
-        });
-}
-function loadRolesForDelete() {
-    let selectDelete = document.getElementById("delete-roles");
-    selectDelete.innerHTML = "";
-
-    fetch("http://localhost:8080/api/admin/roles")
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(role => {
-                let option = document.createElement("option");
-                option.value = role.id;
-                option.text = role.name.replace('ROLE_', '');
-                selectDelete.appendChild(option);
-            });
-        })
-}
-
-window.addEventListener("load", loadRolesForDelete);
 
 // add new user script
 let formNewUser = document.forms["formNewUser"]
-let selectAdd = document.getElementById("new-roles");
 const addedName = document.getElementById("new-name")
 const addedLastName = document.getElementById("new-lastName")
 const addedAge = document.getElementById("new-age")
@@ -415,39 +516,12 @@ function addUser(name, lastName, age, username, password) {
             }
         })
         .then((user) => {
-            const addedRow = `<tr>
-                  <td>${user.id}</td>
-                  <td>${user.name}</td>
-                  <td>${user.lastName}</td>
-                  <td>${user.age}</td>
-                  <td>${user.username}</td>
-                  <td>${addedRoles}</td>
-                   <td>
-                          <button type="button"
-                          class="btn btn-primary"
-                          data-bs-toogle="modal"
-                          data-bs-target="#editModal"
-                          onclick="editModal(${user.id})">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button"
-                            class="btn btn-danger"
-                            data-toggle="modal"
-                            data-target="#deleteModal"
-                            onclick="deleteModal(${user.id})">
-                                Delete
-                            </button>
-                        </td>
-                  </tr>`
-            rows.insertAdjacentHTML("afterbegin", addedRow)
-
         })
         .catch((error) => console.log(error))
 }
 
 function newUserRoles() {
+    let selectAdd = document.getElementById("new-roles");
     selectAdd.innerHTML = "";
 
     fetch("http://localhost:8080/api/admin/roles")
