@@ -46,14 +46,24 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public boolean updateUser(User user) {
-        userDao.updateUser(user);
-        return false;
+        try {
+            userDao.updateUser(user);
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     @Transactional
     public boolean deleteById(Long id) {
-        userDao.deleteById(id);
-        return false;
+        try {
+            userDao.deleteById(id);
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
